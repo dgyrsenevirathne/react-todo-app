@@ -13,6 +13,7 @@ function TodoList() {
     const [editTaskDueDate, setEditTaskDueDate] = useState(''); // New state for editing due date
     const [editTaskCategory, setEditTaskCategory] = useState('Work'); // New state for editing category
     const [selectedCategory, setSelectedCategory] = useState('All'); // State for filtering tasks
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     const categories = ['Work', 'Personal', 'Shopping']; // Define categories
 
@@ -22,6 +23,11 @@ function TodoList() {
             Notification.requestPermission();
         }
     }, []);
+
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+        document.documentElement.setAttribute('data-theme', !isDarkMode ? 'dark' : 'light');
+    };
 
     const checkDueDates = () => {
         const now = new Date();
@@ -89,6 +95,9 @@ function TodoList() {
     return (
         <div>
             <h1>Todo List</h1>
+            <button onClick={toggleDarkMode}>
+                {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            </button>
             <div>
                 <input
                     type="text"
