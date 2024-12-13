@@ -1,51 +1,76 @@
-/* App.css */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
+  background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  color: #333;
 }
 
 .App {
   width: 100%;
   max-width: 600px;
   background: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
   padding: 20px;
   text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 h1 {
-  color: #333;
+  font-size: 2.2rem;
   margin-bottom: 20px;
+  color: #007bff;
 }
 
-input[type="text"] {
-  width: 70%;
+input[type="text"],
+input[type="date"],
+select {
+  width: calc(100% - 120px);
   padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  margin: 10px 5px 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 button {
-  background-color: #007bff;
+  background: linear-gradient(90deg, #007bff, #0056b3);
   color: #fff;
   padding: 10px 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #0056b3, #007bff);
 }
 
 ul {
@@ -58,75 +83,66 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 10px;
-  transition: transform 0.2s ease;
+  background: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 li:hover {
-  transform: scale(1.02);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-li input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-li button {
-  background-color: #dc3545;
-  padding: 5px 10px;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
-li button:hover {
-  background-color: #a71d2a;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 li.completed {
   text-decoration: line-through;
   color: #aaa;
+  background: #e9ecef;
 }
 
-
-.App {
-  text-align: center;
+.priority-badge {
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: #fff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.priority-badge.High {
+  background: #dc3545;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.priority-badge.Medium {
+  background: #ffc107;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.priority-badge.Low {
+  background: #28a745;
 }
 
-.App-link {
-  color: #61dafb;
+li div {
+  flex-grow: 1;
+  margin-left: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+li button {
+  background-color: #ff6b6b;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+li button:hover {
+  transform: scale(1.1);
+  background-color: #fa5252;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
 }
