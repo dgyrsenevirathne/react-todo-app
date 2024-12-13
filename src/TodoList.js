@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function TodoList() {
@@ -10,6 +10,35 @@ function TodoList() {
     const [editTaskText, setEditTaskText] = useState('');
     const [editTaskPriority, setEditTaskPriority] = useState('Medium'); // Default priority for editing
     const [editTaskDueDate, setEditTaskDueDate] = useState(''); // New state for editing due date
+
+
+    useEffect(() => {
+        // Request permission for notifications
+        if (Notification.permission !== 'granted') {
+            Notification.requestPermission();
+        }
+    }, []);
+
+    const checkDueDates = () => {
+        const now = new Date();
+        const oneDayFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+
+        tasks.forEach(task => {
+            if (task.dueDate && new Date(task.dueDate) <= oneDayFromNow && !task.completed) {
+                new Notification(`Reminder: Task "${task.text}" is due soon!`, {
+                    body: `Due Date: ${task.dueDate}`,
+                });
+            }
+        });
+    };
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            checkDueDates();
+        }, 3600000); // Check every hour
+
+        return () => clearInterval(intervalId); // Cleanup on unmount
+    }, [tasks]);
 
     const handleAddTask = () => {
         if (newTask.trim() === '') return;
